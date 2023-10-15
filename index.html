@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="支持语音对话的ChatGPT，简洁而强大的ChatGPT应用">
     <meta name="theme-color" content="#edeff2">
@@ -27,7 +27,7 @@
 
         * {
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji" !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
         }
 
         html {
@@ -95,7 +95,7 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
 
-        .overlay {
+        .chat_window>.overlay {
             width: 100%;
             height: 100%;
             position: absolute;
@@ -126,7 +126,7 @@
                 width: calc(100% - 250px);
             }
 
-            .nav {
+            .chat_window>.nav {
                 position: relative;
                 margin-left: -250px;
                 transition: margin-left 250ms;
@@ -173,7 +173,7 @@
                 width: 100%;
             }
 
-            .nav {
+            .chat_window>.nav {
                 position: absolute !important;
                 left: -250px;
                 transition: left 250ms;
@@ -217,7 +217,7 @@
             max-height: none;
         }
 
-        .nav {
+        .chat_window>.nav {
             width: 250px;
             height: 100%;
             border-right: 1px solid var(--active-btn);
@@ -291,7 +291,7 @@
             pointer-events: none;
         }
 
-        .title>span {
+        .top_menu .title>span {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -309,7 +309,7 @@
         }
 
         .messages::-webkit-scrollbar,
-        #chatlog .markdown-body>pre>code::-webkit-scrollbar,
+        #chatlog .markdown-body pre>code::-webkit-scrollbar,
         #setDialog::-webkit-scrollbar,
         .allList::-webkit-scrollbar,
         .sysDetail::-webkit-scrollbar,
@@ -319,7 +319,7 @@
         }
 
         .messages::-webkit-scrollbar-track,
-        #chatlog .markdown-body>pre>code::-webkit-scrollbar-track,
+        #chatlog .markdown-body pre>code::-webkit-scrollbar-track,
         #setDialog::-webkit-scrollbar-track,
         .allList::-webkit-scrollbar-track,
         .sysDetail::-webkit-scrollbar-track,
@@ -330,7 +330,7 @@
         }
 
         .messages::-webkit-scrollbar-corner,
-        #chatlog .markdown-body>pre>code::-webkit-scrollbar-corner,
+        #chatlog .markdown-body pre>code::-webkit-scrollbar-corner,
         #setDialog::-webkit-scrollbar-corner,
         .allList::-webkit-scrollbar-corner,
         .sysDetail::-webkit-scrollbar-corner,
@@ -339,7 +339,7 @@
         }
 
         .messages::-webkit-scrollbar-thumb,
-        #chatlog .markdown-body>pre>code::-webkit-scrollbar-thumb,
+        #chatlog .markdown-body pre>code::-webkit-scrollbar-thumb,
         #setDialog::-webkit-scrollbar-thumb,
         .allList::-webkit-scrollbar-thumb,
         .sysDetail::-webkit-scrollbar-thumb,
@@ -351,7 +351,7 @@
         }
 
         .messages::-webkit-scrollbar-thumb:hover,
-        #chatlog .markdown-body>pre>code::-webkit-scrollbar-thumb:hover,
+        #chatlog .markdown-body pre>code::-webkit-scrollbar-thumb:hover,
         #setDialog::-webkit-scrollbar-thumb:hover,
         .allList::-webkit-scrollbar-thumb:hover,
         .sysDetail::-webkit-scrollbar-thumb:hover,
@@ -424,18 +424,22 @@
         }
 
         #chatlog .markdown-body a {
-            padding: 0 2px;
+            padding: 0 1px 0 2px;
         }
 
-        #chatlog .markdown-body>pre {
+        #chatlog .markdown-body pre {
             padding: 10px;
             position: relative;
             background: var(--code-color);
         }
 
-        #chatlog .markdown-body>pre>code {
+        #chatlog .markdown-body pre>code {
             overflow-x: auto;
             display: block;
+        }
+
+        #chatlog .markdown-body ul {
+            list-style-type: disc;
         }
 
         .m-mdic-copy-wrapper {
@@ -488,6 +492,12 @@
             outline: none;
             cursor: pointer;
             transition: color 250ms;
+        }
+
+        .m-mdic-copy-wrapper span.u-mdic-copy-code_lang::before,
+        .m-mdic-copy-wrapper div.u-mdic-copy-notify::before,
+        .m-mdic-copy-wrapper button.u-mdic-copy-btn::before {
+            content: attr(text);
         }
 
         .m-mdic-copy-wrapper button.u-mdic-copy-btn:hover {
@@ -1151,19 +1161,18 @@
             display: block;
         }
 
-        .divider {
+        .navFooter {
+            padding-bottom: 8px;
+        }
+
+        .navFooter .divider {
             width: 100%;
             border-top: 1px solid var(--active-btn);
             margin: 4px 0;
         }
 
-        .navFooter {
-            padding-bottom: 8px;
-        }
-
         .navFunc {
-            padding-top: 15px;
-            padding-bottom: 15px;
+            padding-top: 5px;
             display: flex;
             justify-content: space-around;
         }
@@ -1187,22 +1196,20 @@
             background: var(--active-btn);
         }
 
-        .links {
+        .navFooter .links {
             text-align: center;
-            padding-top: 10px;
-            padding-bottom: 10px;
         }
 
-        .links a {
+        .navFooter .links a {
             color: var(--btn-color);
             text-decoration: none;
         }
 
-        .links a:hover {
+        .navFooter .links a:hover {
             color: var(--chat-text-color) !important;
         }
 
-        .links a:visited {
+        .navFooter .links a:visited {
             color: var(--btn-color);
         }
 
@@ -1403,14 +1410,57 @@
             text-align: center;
         }
 
-        #loadMask svg {
-            width: 160px;
-            height: 80px;
+        @keyframes loading {
+
+            0%,
+            100% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1);
+            }
         }
 
-        #loadMask>div>div {
+        .loadingCSSIcon {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        .loadingCSSIcon div {
+            width: 15%;
+            height: 0;
+            padding-bottom: 15%;
+            border-radius: 50%;
+            animation: loading 1s cubic-bezier(0.3, 0, 0.7, 1) infinite;
+        }
+
+        .loadingCSSIcon div:nth-child(1) {
+            background: #e15b64;
+            animation-delay: -0.4s
+        }
+
+        .loadingCSSIcon div:nth-child(2) {
+            background: #f8b26a;
+            animation-delay: -0.2s
+        }
+
+        .loadingCSSIcon div:nth-child(3) {
+            background: #99c959;
+            animation-delay: 0s;
+        }
+
+        #loadMask>div>:first-child {
             font-size: 40px;
             color: var(--text-color);
+        }
+
+        #loadMask>div>:last-child {
+            width: 140px;
+            height: 70px;
+            margin: 0 auto;
         }
 
         #voiceRec {
@@ -1647,6 +1697,8 @@
             font-size: 20px;
             font-weight: bold;
             margin-bottom: 8px;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         .sysSwitch,
@@ -1704,10 +1756,19 @@
         .setTitle {
             margin-bottom: 6px;
             font-weight: bold;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         .setDetail {
             margin: 0 10px;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .autoSelect>label,
+        .autoSelect>input {
+            cursor: pointer;
         }
 
         .dataDetail {
@@ -1915,10 +1976,6 @@
             overflow: hidden;
         }
 
-        .expiredBar {
-            background: #e15b64;
-        }
-
         .nowProgress {
             position: absolute;
             left: 0;
@@ -2009,6 +2066,37 @@
         .delApiOption>svg {
             margin: 6px;
             display: block;
+        }
+    </style>
+    <style>
+        /* for katex */
+        .katex {
+            font-size: 1em !important;
+        }
+
+        eq {
+            display: inline-block;
+        }
+
+        eqn {
+            display: block
+        }
+
+        section.eqno {
+            display: flex;
+            flex-direction: row;
+            align-content: space-between;
+            align-items: center;
+        }
+
+        section.eqno>eqn {
+            width: 100%;
+            margin-left: 3em;
+        }
+
+        section.eqno>span {
+            width: 3em;
+            text-align: right;
         }
     </style>
     <script>
@@ -2133,16 +2221,16 @@
             <symbol viewBox="0 0 200 100" preserveAspectRatio="xMidYMid" id="loadingIcon">
                 <g transform="translate(50 50)">
                     <circle cx="0" cy="0" r="15" fill="#e15b64">
-                        <animateTransform attributeName="transform" type="scale" begin="-0.3333333333333333s"
-                            calcMode="spline" keySplines="0.3 0 0.7 1;0.3 0 0.7 1" values="0;1;0" keyTimes="0;0.5;1"
-                            dur="1s" repeatCount="indefinite"></animateTransform>
+                        <animateTransform attributeName="transform" type="scale" begin="-0.4s" calcMode="spline"
+                            keySplines="0.3 0 0.7 1;0.3 0 0.7 1" values="0;1;0" keyTimes="0;0.5;1" dur="1s"
+                            repeatCount="indefinite"></animateTransform>
                     </circle>
                 </g>
                 <g transform="translate(100 50)">
                     <circle cx="0" cy="0" r="15" fill="#f8b26a">
-                        <animateTransform attributeName="transform" type="scale" begin="-0.16666666666666666s"
-                            calcMode="spline" keySplines="0.3 0 0.7 1;0.3 0 0.7 1" values="0;1;0" keyTimes="0;0.5;1"
-                            dur="1s" repeatCount="indefinite"></animateTransform>
+                        <animateTransform attributeName="transform" type="scale" begin="-0.2s" calcMode="spline"
+                            keySplines="0.3 0 0.7 1;0.3 0 0.7 1" values="0;1;0" keyTimes="0;0.5;1" dur="1s"
+                            repeatCount="indefinite"></animateTransform>
                     </circle>
                 </g>
                 <g transform="translate(150 50)">
@@ -2262,9 +2350,11 @@
     <div id="loadMask">
         <div>
             <div>ChatGPT</div>
-            <svg>
-                <use xlink:href="#loadingIcon" />
-            </svg>
+            <div class="loadingCSSIcon">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
     </div>
     <div class="chat_window">
@@ -2301,19 +2391,6 @@
                 <div id="chatList"></div>
             </div>
             <div class="navFooter">
-                <div class="divider"></div>
-                <div class="links">
-                    <a href="https://gpt.juson.top" target="" rel="noopener noreferrer">GPT-通用版</a>
-                </div>
-                <div class="divider"></div>
-                <div class="links">
-                    <a href="https://gpt2.juson.top" target="" rel="noopener noreferrer">GPT-Bot版</a>
-                </div>
-                <div class="divider"></div>
-                <div class="links">
-                    <a href="https://gpt1.juson.top" target="" rel="noopener noreferrer">GPT-插件版</a>
-                </div>
-                <div class="divider"></div>
                 <div class="navFunc">
                     <div id="refreshPage" data-i18n-title="forceRe" title>
                         <svg width="24" height="24">
@@ -2380,7 +2457,8 @@
                                 <option value="gpt-3.5-turbo-16k">GPT-3.5-16K</option>
                                 <option value="gpt-4">GPT-4</option>
                                 <option value="gpt-4-browsing" data-i18n-key="gptBrowsing"></option>
-                                <option value="gpt-4-32k">GPT-4-32k</option>
+                                <option value="gpt-4-dalle">GPT-4-DALLE</option>
+                                <option value="gpt-4-32k">GPT-4-32K</option>
                             </select>
                         </div>
                         <div>
@@ -2713,11 +2791,11 @@
                         </div>
                         <div class="setContent" id="autoDetail" style="display: none;font-size: 15px;">
                             <div class="setDetail">
-                                <div>
+                                <div class="autoSelect">
                                     <input type="radio" id="autoTheme1" name="autoLight" value="1" checked />
                                     <label for="autoTheme1" data-i18n-key="systemTheme"></label>
                                 </div>
-                                <div style="margin-top: 8px;">
+                                <div class="autoSelect" style="margin-top: 8px;">
                                     <input type="radio" id="autoTheme0" name="autoLight" value="0" />
                                     <label for="autoTheme0" data-i18n-key="customDarkTheme"></label>
                                 </div>
@@ -2748,7 +2826,6 @@
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="setContent setNotNormalFlow" style="display: none;">
                             <div class="setTitle" data-i18n-key="aiEndpoint"></div>
                             <div class="setDetail inputDetail" style="position: relative;">
@@ -2757,30 +2834,11 @@
                                 <div id="apiSelect" tabindex="-1" style="display: none;"></div>
                             </div>
                         </div>
-                        
                         <div class="setContent" style="margin-top: 83px;">
                             <div class="setTitle" data-i18n-key="aiKey"></div>
                             <div class="setDetail inputDetail apiDetail">
                                 <input class="inputTextClass" type="text" placeholder="sk-4VKEAqusXu2KRQbw378426A1F4F3458eB98b808cE6359f72" id="keyInput"
                                     autocomplete="off" style="-webkit-text-security: disc;" />
-                                <div id="checkBillBtn" class="loaded">
-                                    <span data-i18n-key="checkBill"></span>
-                                    <svg style="margin:0 auto;height:34px;width:100%;">
-                                        <use xlink:href="#loadingIcon"></use>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="setContent" id="quotaContent" style="display: none;">
-                            <div class="setTitle" id="quotaTitle" data-i18n-quota></div>
-                            <div class="setDetail">
-                                <div class="progressBar">
-                                    <div class="nowProgress" id="usedQuotaBar"></div>
-                                </div>
-                                <div class="progressDetail">
-                                    <div><span data-i18n-key="used"></span><span id="usedQuota"></span></div>
-                                    <div><span data-i18n-key="available"></span><span id="availableQuota"></span></div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -2850,7 +2908,7 @@
                                     <svg width="22" height="22" style="transform: scaleX(-1)">
                                         <use xlink:href="#refreshIcon" />
                                     </svg>
-                                    <span data-i18n-key="resetHotKeyTip"></span>
+                                    <span data-i18n-key="resetTip"></span>
                                 </div>
                             </div>
                         </div>
@@ -2924,7 +2982,9 @@
             </div>
         </div>
     </div>
-    <link crossorigin="anonymous" href="//cdn.staticfile.org/github-markdown-css/5.2.0/github-markdown-light.min.css"
+    <link crossorigin="anonymous" href="//cdn.staticfile.org/github-markdown-css/5.3.0/github-markdown-light.min.css"
+        rel="stylesheet">
+    <link crossorigin="anonymous" href="//cdn.staticfile.org/highlight.js/11.9.0/styles/github.min.css"
         rel="stylesheet">
     <link crossorigin="anonymous" href="//cdn.staticfile.org/notyf/3.10.0/notyf.min.css" rel="stylesheet">
     <script crossorigin="anonymous" src="//cdn.staticfile.org/notyf/3.10.0/notyf.min.js"></script>
@@ -3032,7 +3092,7 @@
             }
         }
         const initLang = () => {
-            let localLang = localStorage.getItem("UILang") || "zh";
+            let localLang = localStorage.getItem("UILang") || (navigator.language.startsWith("zh-") ? "zh" : "en");
             let isInit = locale === void 0;
             if (locale !== localLang) {
                 locale = localLang;
@@ -3139,7 +3199,6 @@
                 "endDark": "End",
                 "aiEndpoint": "OpenAI endpoint",
                 "aiKey": "OpenAI API key",
-                "checkBill": "Check bill",
                 "used": "Used ",
                 "available": "Avail ",
                 "navKey": "Toggle nav",
@@ -3148,7 +3207,7 @@
                 "themeKey": "Toggle lang",
                 "inputKey": "Message",
                 "voiceKey": "Voice",
-                "resetHotKeyTip": "Restore default",
+                "resetTip": "Restore default",
                 "recKey": "Recognition",
                 "speechKey": "Start speech",
                 "export": "Export",
@@ -3161,8 +3220,6 @@
                 "noMicTip": "No microphone was found. Ensure that a microphone is installed and microphone settings are configured correctly.",
                 "noMicPerTip": "Permission to use microphone is blocked.",
                 "azureInvalidTip": "Access is denied due to invalid access key or API endpoint!",
-                "thisQuota": "This month's quota",
-                "freeTierTip": "Free tier - valid until: ",
                 "errorAiKeyTip": "Invalid or incorrect API key, please check API key!",
                 "copyCode": "Copy code",
                 "copySuccess": "Success",
@@ -3296,7 +3353,6 @@
                 "endDark": "结束时间",
                 "aiEndpoint": "OpenAI接口",
                 "aiKey": "API密钥",
-                "checkBill": "检查API额度",
                 "used": "已用 ",
                 "available": "可用 ",
                 "navKey": "切换导航",
@@ -3305,7 +3361,7 @@
                 "langKey": "切换语言",
                 "inputKey": "输入框",
                 "voiceKey": "语音",
-                "resetHotKeyTip": "恢复默认设值",
+                "resetTip": "重置设置",
                 "recKey": "语音输入",
                 "speechKey": "朗读会话",
                 "export": "导出",
@@ -3318,8 +3374,6 @@
                 "noMicTip": "未识别到麦克风，请确保已安装麦克风！",
                 "noMicPerTip": "未允许麦克风权限！",
                 "azureInvalidTip": "由于订阅密钥无效或 API 端点错误，访问被拒绝！",
-                "thisQuota": "本月额度",
-                "freeTierTip": "免费额度-有效期至: ",
                 "errorAiKeyTip": "API密钥错误或失效，请检查API密钥！",
                 "copyCode": "复制代码",
                 "copySuccess": "复制成功",
@@ -3383,15 +3437,6 @@
                 let key = isFull ? "winedWin" : "fullWin";
                 ele.setAttribute("title", translations[locale][key])
             })
-            document.querySelectorAll("[data-i18n-quota]").forEach(ele => {
-                let splitIdx = ele.innerHTML.indexOf(":");
-                if (splitIdx === -1) {
-                    ele.textContent = translations[locale]["thisQuota"];
-                } else {
-                    let validHtml = ele.innerHTML.slice(splitIdx + 2);
-                    ele.innerHTML = translations[locale]["freeTierTip"] + validHtml;
-                }
-            })
             document.head.children[3].setAttribute("content", translations[locale]["description"])
         };
         initLocale();
@@ -3423,10 +3468,10 @@
                 ele.textContent = num + translations[locale]["chats"];
             });
             document.querySelectorAll(".u-mdic-copy-btn").forEach(ele => {
-                ele.textContent = translations[locale]["copyCode"];
+                ele.setAttribute("text", translations[locale]["copyCode"]);
             })
             document.querySelectorAll(".u-mdic-copy-notify").forEach(ele => {
-                ele.textContent = translations[locale]["copySuccess"];
+                ele.setAttribute("text", translations[locale]["copySuccess"]);
             })
             if (editingIdx !== void 0) {
                 document.querySelector("[data-i18n-key='send']").textContent = translations[locale]["update"];
@@ -3485,6 +3530,12 @@
         let toggleRecEv;
         const isAndroid = /\bAndroid\b/i.test(navigator.userAgent);
         const isApple = /(Mac|iPhone|iPod|iPad)/i.test(navigator.userAgent);
+        const isPWA = navigator.standalone || window.matchMedia("(display-mode: standalone)").matches;
+        if (isPWA) {
+            let bottomEle = document.querySelector(".bottom_wrapper");
+            let footerEle = document.querySelector(".navFooter");
+            footerEle.style.marginBottom = bottomEle.style.marginBottom = "8px";
+        };
         const dayMs = 8.64e7;
         refreshPage.onclick = () => {
             if (confirmAction(translations[locale]["forceReTip"])) {
@@ -3586,7 +3637,7 @@
                 };
                 let localLangIdx = 0;
                 let localDiaIdx = 0;
-                let localRecLang = localStorage.getItem("voiceRecLang") || "cmn-Hans-CN";
+                let localRecLang = localStorage.getItem("voiceRecLang") || langs[0][1][0];
                 if (localRecLang) {
                     let localIndex = langs.findIndex(item => {
                         let diaIdx = item.findIndex(lang => { return lang instanceof Array && lang[0] === localRecLang });
@@ -4288,12 +4339,13 @@
         };
         speechServiceEle.dispatchEvent(new Event("change"));
     </script>
-    <script crossorigin="anonymous" src="//cdn.staticfile.org/markdown-it/13.0.1/markdown-it.min.js"></script>
-    <script crossorigin="anonymous" src="//cdn.staticfile.org/highlight.js/11.8.0/highlight.min.js"></script>
-    <script crossorigin="anonymous" src="//cdn.staticfile.org/KaTeX/0.16.7/katex.min.js"></script>
-    <script crossorigin="anonymous" src="//npm.elemecdn.com/markdown-it-texmath@1.0.0/texmath.js"></script>
-    <script crossorigin="anonymous"
-        src="//npm.elemecdn.com/markdown-it-link-attributes@4.0.1/dist/markdown-it-link-attributes.min.js"></script>
+    <script crossorigin="anonymous" src="//cdn.staticfile.org/markdown-it/13.0.2/markdown-it.min.js"></script>
+    <script crossorigin="anonymous" src="//cdn.staticfile.org/highlight.js/11.9.0/highlight.min.js"></script>
+    <script crossorigin="anonymous" src="//cdn.staticfile.org/KaTeX/0.16.9/katex.min.js"></script>
+    <script>
+        // from markdown-it-texmath@1.0.0
+        function escapeHTML(e){return e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}function texmath(e,t){const n=texmath.mergeDelimiters(t&&t.delimiters),a=t&&t.outerSpace||!1,o=t&&t.katexOptions||{};o.throwOnError=o.throwOnError||!1,o.macros=o.macros||t&&t.macros,texmath.katex||(t&&"object"==typeof t.engine?texmath.katex=t.engine:"object"==typeof module?texmath.katex=require("katex"):texmath.katex={renderToString:()=>"No math renderer found."});for(const t of n.inline)a&&"outerSpace"in t&&(t.outerSpace=!0),e.inline.ruler.before("escape",t.name,texmath.inline(t)),e.renderer.rules[t.name]=(e,n)=>t.tmpl.replace(/\$1/,texmath.render(e[n].content,!!t.displayMode,o));for(const t of n.block)e.block.ruler.before("fence",t.name,texmath.block(t)),e.renderer.rules[t.name]=(e,n)=>t.tmpl.replace(/\$2/,escapeHTML(e[n].info)).replace(/\$1/,texmath.render(e[n].content,!0,o))}texmath.mergeDelimiters=function(e){const t=Array.isArray(e)?e:"string"==typeof e?[e]:["dollars"],n={inline:[],block:[]};for(const e of t)e in texmath.rules&&(n.inline.push(...texmath.rules[e].inline),n.block.push(...texmath.rules[e].block));return n},texmath.inline=e=>function(t,n){const a=t.pos,o=t.src,r=o.startsWith(e.tag,e.rex.lastIndex=a)&&(!e.pre||e.pre(o,e.outerSpace,a))&&e.rex.exec(o),s=!!r&&a<e.rex.lastIndex&&(!e.post||e.post(o,e.outerSpace,e.rex.lastIndex-1));if(s){if(!n){const n=t.push(e.name,"math",0);n.content=r[1],n.markup=e.tag}t.pos=e.rex.lastIndex}return s},texmath.block=e=>function(t,n,a,o){const r=t.bMarks[n]+t.tShift[n],s=t.src,m=s.startsWith(e.tag,e.rex.lastIndex=r)&&(!e.pre||e.pre(s,!1,r))&&e.rex.exec(s),l=!!m&&r<e.rex.lastIndex&&(!e.post||e.post(s,!1,e.rex.lastIndex-1));if(l&&!o){const o=e.rex.lastIndex-1;let r;for(r=n;r<a&&!(o>=t.bMarks[r]+t.tShift[r]&&o<=t.eMarks[r]);r++);const s=t.lineMax,l=t.parentType;t.lineMax=r,t.parentType="math","blockquote"===l&&(m[1]=m[1].replace(/(\n*?^(?:\s*>)+)/gm,""));let c=t.push(e.name,"math",0);c.block=!0,c.tag=e.tag,c.markup="",c.content=m[1],c.info=m[m.length-1],c.map=[n,r+1],t.parentType=l,t.lineMax=s,t.line=r+1}return l},texmath.render=function(e,t,n){let a;n.displayMode=t;try{a=texmath.katex.renderToString(e,n)}catch(t){a=escapeHTML(`${e}:${t.message}`)}return a},texmath.inlineRuleNames=["math_inline","math_inline_double"],texmath.blockRuleNames=["math_block","math_block_eqno"],texmath.$_pre=(e,t,n)=>{const a=n>0&&e[n-1].charCodeAt(0);return t?!a||32===a:!a||92!==a&&(a<48||a>57)},texmath.$_post=(e,t,n)=>{const a=e[n+1]&&e[n+1].charCodeAt(0);return t?!a||32===a||46===a||44===a||59===a:!a||a<48||a>57},texmath.rules={brackets:{inline:[{name:"math_inline",rex:/\\\((.+?)\\\)/gy,tmpl:"<eq>$1</eq>",tag:"\\("}],block:[{name:"math_block_eqno",rex:/\\\[(((?!\\\]|\\\[)[\s\S])+?)\\\]\s*?\(([^)$\r\n]+?)\)/gmy,tmpl:'<section class="eqno"><eqn>$1</eqn><span>($2)</span></section>',tag:"\\["},{name:"math_block",rex:/\\\[([\s\S]+?)\\\]/gmy,tmpl:"<section><eqn>$1</eqn></section>",tag:"\\["}]},doxygen:{inline:[{name:"math_inline",rex:/\\f\$(.+?)\\f\$/gy,tmpl:"<eq>$1</eq>",tag:"\\f$"}],block:[{name:"math_block_eqno",rex:/\\f\[([^]+?)\\f\]\s*?\(([^)\s]+?)\)/gmy,tmpl:'<section class="eqno"><eqn>$1</eqn><span>($2)</span></section>',tag:"\\f["},{name:"math_block",rex:/\\f\[([^]+?)\\f\]/gmy,tmpl:"<section><eqn>$1</eqn></section>",tag:"\\f["}]},gitlab:{inline:[{name:"math_inline",rex:/\$`(.+?)`\$/gy,tmpl:"<eq>$1</eq>",tag:"$`"}],block:[{name:"math_block_eqno",rex:/`{3}math\s*([^`]+?)\s*?`{3}\s*\(([^)\r\n]+?)\)/gm,tmpl:'<section class="eqno"><eqn>$1</eqn><span>($2)</span></section>',tag:"```math"},{name:"math_block",rex:/`{3}math\s*([^`]*?)\s*`{3}/gm,tmpl:"<section><eqn>$1</eqn></section>",tag:"```math"}]},julia:{inline:[{name:"math_inline",rex:/`{2}([^`]+?)`{2}/gy,tmpl:"<eq>$1</eq>",tag:"``"},{name:"math_inline",rex:/\$((?:\S?)|(?:\S.*?\S))\$/gy,tmpl:"<eq>$1</eq>",tag:"$",spaceEnclosed:!1,pre:texmath.$_pre,post:texmath.$_post}],block:[{name:"math_block_eqno",rex:/`{3}math\s+?([^`]+?)\s+?`{3}\s*?\(([^)$\r\n]+?)\)/gmy,tmpl:'<section class="eqno"><eqn>$1</eqn><span>($2)</span></section>',tag:"```math"},{name:"math_block",rex:/`{3}math\s+?([^`]+?)\s+?`{3}/gmy,tmpl:"<section><eqn>$1</eqn></section>",tag:"```math"}]},kramdown:{inline:[{name:"math_inline",rex:/\${2}(.+?)\${2}/gy,tmpl:"<eq>$1</eq>",tag:"$$"}],block:[{name:"math_block_eqno",rex:/\${2}([^$]+?)\${2}\s*?\(([^)\s]+?)\)/gmy,tmpl:'<section class="eqno"><eqn>$1</eqn><span>($2)</span></section>',tag:"$$"},{name:"math_block",rex:/\${2}([^$]+?)\${2}/gmy,tmpl:"<section><eqn>$1</eqn></section>",tag:"$$"}]},beg_end:{inline:[],block:[{name:"math_block",rex:/(\\(?:begin)\{([a-z]+)\}[\s\S]+?\\(?:end)\{\2\})/gmy,tmpl:"<section><eqn>$1</eqn></section>",tag:"\\"}]},dollars:{inline:[{name:"math_inline_double",rex:/\${2}([^$]*?[^\\])\${2}/gy,tmpl:"<section><eqn>$1</eqn></section>",tag:"$$",displayMode:!0,pre:texmath.$_pre,post:texmath.$_post},{name:"math_inline",rex:/\$((?:[^\s\\])|(?:\S.*?[^\s\\]))\$/gy,tmpl:"<eq>$1</eq>",tag:"$",outerSpace:!1,pre:texmath.$_pre,post:texmath.$_post}],block:[{name:"math_block_eqno",rex:/\${2}([^$]*?[^\\])\${2}\s*?\(([^)\s]+?)\)/gmy,tmpl:'<section class="eqno"><eqn>$1</eqn><span>($2)</span></section>',tag:"$$"},{name:"math_block",rex:/\${2}([^$]*?[^\\])\${2}/gmy,tmpl:"<section><eqn>$1</eqn></section>",tag:"$$"}]}};
+    </script>
     <script>
         const API_URL = "v1/chat/completions";
         let loading = false;
@@ -4371,131 +4423,12 @@
             escapeTextarea.textContent = str;
             return escapeTextarea.innerHTML;
         }
+        const parser = new DOMParser();
         const getUnescape = html => {
-            escapeTextarea.innerHTML = html;
-            return escapeTextarea.textContent;
+            return parser.parseFromString(html, 'text/html').body.textContent;
         }
-        const escapeRegExp = (str) => {
+        const escapeRegexExp = (str) => { // from vscode src/vs/base/common/strings.ts escapeRegExpCharacters
             return str.replace(/[\\\{\}\*\+\?\|\^\$\.\[\]\(\)]/g, '\\$&');
-        }
-        const formatDate = date => {
-            const year = date.getFullYear();
-            const month = (date.getMonth() + 1).toString().padStart(2, "0");
-            const day = date.getDate().toString().padStart(2, "0");
-            return `${year}-${month}-${day}`;
-        }
-        const checkBill = async () => {
-            let headers = { "Content-Type": "application/json" };
-            if (customAPIKey) headers["Authorization"] = "Bearer " + customAPIKey;
-            let subCtrl = new AbortController();
-            setTimeout(() => {
-                subCtrl.abort();
-            }, 20000);
-            let subRes;
-            try {
-                subRes = await fetch(apiHost + "v1/dashboard/billing/subscription", {
-                    headers,
-                    signal: subCtrl.signal
-                });
-                if (subRes.status !== 200) return;
-            } catch (e) {
-                return;
-            }
-            const subData = await subRes.json();
-            const totalQuota = subData.hard_limit_usd;
-            const isSubsrcibed = subData.has_payment_method;
-            const urlUsage = apiHost + "v1/dashboard/billing/usage?";
-            let useCtrl = new AbortController();
-            const nowDate = new Date(new Date().getTime() + dayMs);
-            let usedData;
-            let expired;
-            setTimeout(() => {
-                useCtrl.abort();
-            }, 20000);
-            if (isSubsrcibed) {
-                const subDate = new Date();
-                subDate.setDate(1);
-                try {
-                    const useRes = await fetch(urlUsage + `start_date=${formatDate(subDate)}&end_date=${formatDate(nowDate)}`, {
-                        headers,
-                        signal: useCtrl.signal
-                    });
-                    const useJson = await useRes.json();
-                    usedData = useJson.total_usage / 100;
-                } catch (e) {
-                    return;
-                }
-            } else {
-                let urls = [];
-                const expireTime = subData.access_until * 1000;
-                expired = new Date(expireTime);
-                const startDate = new Date(expireTime - 128 * dayMs);
-                const midDate = new Date(expireTime - 64 * dayMs);
-                const endDate = new Date(expireTime + dayMs);
-                if (nowDate < midDate) {
-                    urls.push(`start_date=${formatDate(startDate)}&end_date=${formatDate(nowDate)}`);
-                } else if (nowDate < endDate) {
-                    urls.push(`start_date=${formatDate(startDate)}&end_date=${formatDate(midDate)}`);
-                    if (formatDate(nowDate) !== formatDate(midDate)) {
-                        urls.push(`start_date=${formatDate(midDate)}&end_date=${formatDate(nowDate)}`);
-                    }
-                } else {
-                    urls.push(`start_date=${formatDate(startDate)}&end_date=${formatDate(midDate)}`);
-                    urls.push(`start_date=${formatDate(midDate)}&end_date=${formatDate(endDate)}`);
-                }
-                try {
-                    const uses = await Promise.all(urls.map(async url => {
-                        return new Promise((res, rej) => {
-                            fetch(urlUsage + url, {
-                                headers,
-                                signal: useCtrl.signal
-                            }).then(response => {
-                                response.json().then(json => {
-                                    if (json.total_usage !== void 0) res(json.total_usage);
-                                    else rej();
-                                });
-                            }).catch(() => {
-                                rej();
-                            })
-                        })
-                    }));
-                    usedData = uses.reduce((prev, curr) => prev + curr, 0) / 100;
-                } catch (e) {
-                    return;
-                }
-            }
-            if (usedData > totalQuota) usedData = totalQuota;
-            return [totalQuota, usedData, isSubsrcibed, expired];
-        }
-        let checkingBill = false;
-        checkBillBtn.onclick = async () => {
-            if (checkingBill) return;
-            checkingBill = true;
-            checkBillBtn.className = "loading";
-            quotaContent.style.display = "none";
-            try {
-                let res = await checkBill();
-                if (!res) throw new Error("API error");
-                let [total, used, isSub, exp] = res;
-                usedQuotaBar.style.width = (used / total * 100).toFixed(2) + "%";
-                usedQuotaBar.parentElement.classList.remove("expiredBar");
-                usedQuota.textContent = "$" + used.toFixed(2);
-                let remain = total - used;
-                availableQuota.textContent = "$" + Math.floor(remain * 100) / 100;
-                if (isSub) {
-                    quotaTitle.textContent = translations[locale]["thisQuota"];
-                } else {
-                    let isExpired = new Date() > exp;
-                    if (isExpired) usedQuotaBar.parentElement.classList.add("expiredBar");
-                    let accessDate = formatDate(exp);
-                    quotaTitle.innerHTML = translations[locale]["freeTierTip"] + `<span style="color: ${isExpired ? "#e15b64" : "#99c959"} ">${accessDate}</span>`;
-                }
-                quotaContent.style.display = "block";
-            } catch (e) {
-                notyf.error(translations[locale]["errorAiKeyTip"]);
-            }
-            checkingBill = false;
-            checkBillBtn.className = "loaded";
         }
         const checkStorage = () => {
             let used = 0;
@@ -4602,15 +4535,21 @@
         });
         md.inline.ruler.after("emphasis", "sup", superscript);
         md.inline.ruler.after("emphasis", "sub", subscript);
-        md.use(texmath, { engine: katex, delimiters: "dollars", katexOptions: { macros: { "\\RR": "\\mathbb{R}" } } })
-            .use(markdownitLinkAttributes, { attrs: { target: "_blank", rel: "noopener" } });
+        md.use(texmath, { engine: katex, delimiters: "dollars", katexOptions: { macros: { "\\RR": "\\mathbb{R}" } } });
+        md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
+            let aIndex = tokens[idx].attrIndex("target");
+            if (tokens[idx + 1] && tokens[idx + 1].type === "image") tokens[idx].attrPush(["download", ""]);
+            else if (aIndex < 0) tokens[idx].attrPush(["target", "_blank"]);
+            else tokens[idx].attrs[aIndex][1] = "_blank";
+            return self.renderToken(tokens, idx, options);
+        };
         const codeUtils = {
             getCodeLang(str = "") {
                 const res = str.match(/ class="language-(.*?)"/);
                 return (res && res[1]) || "";
             },
             getFragment(str = "") {
-                return str ? `<span class="u-mdic-copy-code_lang">${str}</span>` : "";
+                return str ? `<span class="u-mdic-copy-code_lang" text="${str}"></span>` : "";
             },
         };
         const getCodeLangFragment = (oriStr = "") => {
@@ -4659,23 +4598,22 @@
             const tpls = [
                 '<div class="m-mdic-copy-wrapper">',
                 `${langFrag}`,
-                `<div class="u-mdic-copy-notify" style="display:none;">${successText}</div>`,
-                '<button ',
-                'class="u-mdic-copy-btn j-mdic-copy-btn" ',
-                `data-mdic-notify-delay="${successTextDelay}" `,
-                `onclick="copyClickCode(this)">${btnText}</button>`,
+                `<div class="u-mdic-copy-notify" style="display:none;" text="${successText}"></div>`,
+                `<button class="u-mdic-copy-btn j-mdic-copy-btn" text="${btnText}" data-mdic-notify-delay="${successTextDelay}" onclick="copyClickCode(this)"></button>`,
                 '</div>',
             ];
             return originResult.replace("</pre>", `${tpls.join("")}</pre>`);
         };
         md.renderer.rules.code_block = enhanceCode(md.renderer.rules.code_block);
         md.renderer.rules.fence = enhanceCode(md.renderer.rules.fence);
-        md.renderer.rules.image = function (tokens, idx, options, env, slf) {
+        md.renderer.rules.image = function (tokens, idx, options, env, self) {
             let token = tokens[idx];
-            token.attrs[token.attrIndex("alt")][1] = slf.renderInlineAsText(token.children, options, env);
+            token.attrs[token.attrIndex("alt")][1] = self.renderInlineAsText(token.children, options, env);
             token.attrSet("onload", "scrollToBottomLoad(this);this.removeAttribute('onload');this.removeAttribute('onerror')");
             token.attrSet("onerror", "scrollToBottomLoad(this);this.removeAttribute('onload');this.removeAttribute('onerror')");
-            return slf.renderToken(tokens, idx, options)
+            token.attrPush(["decoding", "async"]);
+            token.attrPush(["loading", "lazy"]);
+            return self.renderToken(tokens, idx, options)
         }
         let currentVoiceIdx;
         let editingIdx;
@@ -5434,7 +5372,7 @@
                 let chatEle = getChatEle(i);
                 chatEle.style.display = null;
                 let flags = isCaseSearch ? "" : "i";
-                let pattern = escapeRegExp(searchChatEle.value);
+                let pattern = escapeRegexExp(searchChatEle.value);
                 let regex = new RegExp(pattern, flags);
                 let nameData = chatsData[i].name.match(regex);
                 let nameIdx = nameData ? nameData.index : -1;
@@ -5497,6 +5435,7 @@
         document.getElementById("resetHotKey").onclick = () => {
             localStorage.removeItem("hotKeys");
             initHotKey();
+            notyf.success(translations[locale]["resetSetSuccTip"]);
         };
         const blobToText = (blob) => {
             return new Promise((res, rej) => {
@@ -5837,7 +5776,6 @@
             let localKey = localStorage.getItem("APIKey");
             customAPIKey = keyEle.value = envAPIKey || localKey || keyEle.getAttribute("value") || "";
             keyEle.onchange = () => {
-                quotaContent.style.display = "none";
                 customAPIKey = keyEle.value;
                 localStorage.setItem("APIKey", customAPIKey);
             }
@@ -5989,6 +5927,8 @@
             const setDarkTheme = (is) => {
                 let cssEle = document.body.getElementsByTagName("link")[0];
                 cssEle.href = cssEle.href.replace(is ? "light" : "dark", is ? "dark" : "light");
+                let hlCssEle = document.body.getElementsByTagName("link")[1];
+                hlCssEle.href = hlCssEle.href.replace(is ? "github" : "github-dark", is ? "github-dark" : "github");
                 justDarkTheme(is);
             }
             const handleAutoMode = (ele) => {
@@ -6424,7 +6364,7 @@
             let pitch = voicePitch[type];
             let style = azureStyle[type];
             let role = azureRole[type];
-            let content = data[idx].content;
+            let content = chatlog.children[systemRole ? idx - 1 : idx].children[1].textContent;
             let key = content + voice + volume + rate + pitch + (style ? style : "") + (role ? role : "");
             let blob = voiceData[key];
             if (blob) {
@@ -6492,7 +6432,7 @@
             chatlog.children[systemRole ? idx - 1 : idx].classList.add("showVoiceCls");
             let voiceIconEle = chatlog.children[systemRole ? idx - 1 : idx].lastChild.lastChild;
             voiceIconEle.className = "voiceCls pauseVoice";
-            let content = data[idx].content;
+            let content = chatlog.children[systemRole ? idx - 1 : idx].children[1].textContent;
             let volume = voiceVolume[type];
             let rate = voiceRate[type];
             let pitch = voicePitch[type];
@@ -6589,7 +6529,7 @@
         let autoOnlineVoiceFlag = false;
         const autoAddQuene = () => {
             if (voiceContentQuene.length) {
-                let content = voiceContentQuene.shift();
+                let content = getUnescape(md.render(voiceContentQuene.shift()));
                 let currDate = getTime();
                 let uuid = uuidv4();
                 let voice = voiceRole[1].Name;
@@ -6745,7 +6685,7 @@
             controllerId = setTimeout(() => {
                 notyf.error(translations[locale]["timeoutTip"]);
                 stopLoading();
-            }, 120000);
+            }, 200000);
             let isRefresh = refreshIdx !== void 0;
             if (isRefresh) {
                 currentResEle = chatlog.children[systemRole ? refreshIdx - 1 : refreshIdx];
@@ -7001,10 +6941,7 @@
             }
         }
     </script>
-    <link crossorigin="anonymous" href="//cdn.staticfile.org/highlight.js/11.8.0/styles/github.min.css"
-        rel="stylesheet">
-    <link crossorigin="anonymous" href="//cdn.staticfile.org/KaTeX/0.16.7/katex.min.css" rel="stylesheet">
-    <link crossorigin="anonymous" href="//npm.elemecdn.com/markdown-it-texmath@1.0.0/css/texmath.css" rel="stylesheet">
+    <link crossorigin="anonymous" href="//cdn.staticfile.org/KaTeX/0.16.9/katex.min.css" rel="stylesheet">
     <script defer>
         let downRoleController = new AbortController();
         const loadPrompt = () => {
